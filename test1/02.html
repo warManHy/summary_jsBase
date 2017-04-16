@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>网页换肤</title>
+</head>
+<style>
+    body{overflow: hidden;color: #fff;}
+    .div1{
+        width: 460px;
+        height:300px;
+        background-color: #00ce0d;
+    }
+    .div2{
+        width: 460px;
+        height:300px;
+        background-color: red;
+    }
+    .div3{
+        width: 460px;
+        height:300px;
+        background-color: blue;
+    }
+    #div1{float: left}
+    #div2{width:100%;height: 300px;background-color: #a8a8a2;margin-left:460px;}
+    #div3{width: 100%;height: 300px;background-color: #00b0e8}
+    .box,.boxa{
+        width: 20px;
+        height:20px;
+        margin: 20px;
+        border: 2px solid #ffffaa;
+        float: left;
+    }
+    .box1{
+        background-color: #00ce0d;
+    }
+    .box2{
+        background-color: red;
+    }
+    .box3{
+        background-color: blue;
+    }
+</style>
+<body>
+    <div class="div1" id="div1">
+        <!--局部改变css的class-->
+        <div class="box1 box"></div>
+        <div class="box2 box"></div>
+        <div class="box3 box"></div>
+    </div>
+    <script type="text/javascript">
+        var div1 = document.getElementById("div1");
+        var boxs = document.getElementsByClassName("box");  //IE9及以上
+
+        for(var i=0;i<boxs.length;i++){
+            boxs[i].index = i;
+            boxs[i].onclick = function(){
+                //console.log(this.index);
+                div1.className = "div"+(this.index+1);
+            };
+        }
+    </script>
+    <div id="div2">
+        //第一种方法
+        使用改变的className实现
+        <p> for(var i=0;i < boxs[i].length;i++){ </p>
+        <p>&nbsp     boxs[i].index = i;</p>
+        <p>&nbsp    boxs[i].onclick = function(){</p>
+        <p>&nbsp    //console.log(this.index);</p>
+        <p>&nbsp&nbsp    div1.className = "div"+(this.index+1);</p>
+        <p>&nbsp    };</p>
+        <p>}</p>
+    </div>
+    <div id="div3">
+        <blockquote>
+            <a href="http://www.fgm.cc/learn/lesson1/02.html">链接</a>
+            //第二种变换css文件<br>
+            window.onload = function ()<br>
+            {<br>
+                    var oLink = document.getElementsByTagName("link")[0];<br>
+                    var oSkin = document.getElementById("skin").getElementsByTagName("li");<br>
+
+                    for(var i = 0; i< oSkin.length; i++)<br>
+                    {<br>
+                        oSkin[i].onclick = function ()<br>
+                        {<br>
+                            for(var p in oSkin) oSkin[p].className = "";<br>
+                            this.className = "current";<br>
+                            oLink['href'] = this.id + ".css";<br>
+                        }<br>
+                    }<br>
+
+            };<br>
+        </blockquote>
+    </div>
+</body>
+</html>

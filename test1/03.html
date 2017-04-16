@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>循环变红</title>
+</head>
+<style>
+    .con{
+        width: 960px;
+        height: auto;
+        margin: 0 auto;
+        background-color: #a8a8a2;
+    }
+    .div1{
+        height:300px;
+        display: flex;
+        border-bottom: 4px solid #fff;
+    }
+    .div1 div{
+        width: 100px;
+        height:100px;
+        background-color: #00b0e8;
+        margin: 50px;
+    }
+</style>
+<body>
+<div class="con">
+    <input type="button" value="全部变色">
+    <div class="div1" id="div1">
+        <div class="box1"></div>
+        <div class="box2"></div>
+        <div class="box3"></div>
+    </div>
+    <script type="text/javascript">
+        var div1 = document.getElementById("div1");
+        var boxs = div1.getElementsByTagName("div");
+        var btn1 = document.getElementsByTagName("input")[0];
+        btn1.onclick =function(){
+            for(var i=0;i<boxs.length;i++){
+                boxs[i].style.backgroundColor = "red";
+            }
+        };
+    </script>
+    <input type="button" value="一个接着一个变色">
+    <div class="div1" id="div2">
+        <div class="box1"></div>
+        <div class="box2"></div>
+        <div class="box3"></div>
+    </div>
+    <script type="text/javascript">
+        var div2 = document.getElementById("div2");
+        var box2s = div2.getElementsByTagName("div");
+        var btn2 = document.getElementsByTagName("input")[1];
+        btn2.onclick =function(){
+            for(var i=0;i<box2s.length;i++){
+                //box2s[i].style.backgroundColor = "red";
+                (function(i){
+                    setTimeout(function(){
+                        box2s[i].style.backgroundColor ="red";
+                    },i*1000);
+                })(i);
+            }
+        };
+    </script>
+</div>
+</body>
+</html>

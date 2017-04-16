@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>鼠标移入密码显示</title>
+</head>
+<style>
+    .div1{
+        width: 960px;
+        height:160px;
+        margin: 0 auto;
+        background-color: #a8a8a2;
+    }
+    input[type="checkbox"]{
+        width:20px;
+        height:20px;
+    }
+    label{
+        color: #f4f4f4;
+    }
+    .box1{
+        width: 300px;
+        height:100px;
+        background-color: yellow;
+        border:1px solid #ff0000;
+        display: none;
+    }
+</style>
+<body>
+<div class="div1">
+    <label for=""><input type="checkbox">俩周内自动登录</label>
+    <div class="box1">为了您的信息安全，请不要在网吧或公用电脑上使用此功能！</div>
+</div>
+<script type="text/javascript">
+    var label = document.getElementsByTagName("label")[0];
+    var box1 = document.getElementsByClassName("box1")[0];
+    box1.onmouseover  = label.onmouseover = function(){
+          box1.style.display = "block";
+    };
+    box1.onmouseout  = label.onmouseout = function(){
+        box1.style.display = "none";
+    };
+</script>
+</body>
+</html>

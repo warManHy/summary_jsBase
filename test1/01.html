@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>控制Div属性</title>
+</head>
+<style>
+    .div1,.div2,.code1,.code2{
+        width: 560px;
+        height:400px;
+        background-color: #ffffaa;
+        margin: 20px;
+        float: left;
+    }
+    .code1,.code2{
+        background-color: #eeeeee;
+        height: auto;
+    }
+    .control{
+        width: 100%;
+        height:100px;
+    }
+    .box{
+        width:200px;
+        height:200px;
+        background-color: #000;
+        margin: 0 auto;
+    }
+</style>
+<body>
+
+<div class="div1">
+    <div class="control">
+        <button id="larger">变宽</button>
+        <button id="heighter">变高</button>
+        <button id="white">变白</button>
+        <button id="hide">影藏</button>
+        <button id="reset">重置</button>
+    </div>
+    <div id="box" class="box"></div>
+</div>
+<script type="text/javascript">
+    function $(id){
+        return document.getElementById(id);
+    }
+    var box = $('box');
+    $('larger').onclick = function(){
+        box.style.width = "300px";
+    }
+    $('heighter').onclick = function(){
+        box.style.height = "300px";
+    }
+    $('white').onclick = function(){
+        box.style.backgroundColor = "white";
+    }
+    $('hide').onclick = function(){
+        box.style.display = "none";
+    }
+    $('reset').onclick = function(){
+        box.style.display = "block";
+        box.style.width = "200px";
+        box.style.height = "200px";
+        box.style.backgroundColor = "#000";
+    }
+</script>
+
+<div class="div2">
+    <div class="control">
+        <input type="button" value="变宽" />
+        <input type="button" value="变高" />
+        <input type="button" value="变色" />
+        <input type="button" value="隐藏" />
+        <input type="button" value="重置" />
+    </div>
+    <div id="box2" class="box"></div>
+</div>
+<script type="text/javascript">
+    function changeStyle(elem,attr,value){
+        elem.style[attr] = value;
+    }
+    window.onload = function ()
+    {
+        var oBtn = document.getElementsByTagName("input");
+        var oDiv = $("box2");
+        var oAtt = ["width","height","background","display","display"];
+        var oVal = ["300px","300px","red","none","block"];
+
+        for (var i = 0; i < oBtn.length; i++)
+        {
+            oBtn[i].index = i;
+            oBtn[i].onclick = function ()
+            {
+                console.log(this.index,oBtn.length-1,oDiv.style.cssText)
+                // if this.index is last one => oDiv的style为“”；
+                this.index == oBtn.length - 1 && (oDiv.style.cssText = "");  //== > &&
+                changeStyle(oDiv, oAtt[this.index], oVal[this.index])
+            }
+        }
+    };
+</script>
+
+<div class="clear" style="clear:both"></div>
+<div class="code1">
+    <h1>第一种的实现方式</h1>
+    <p>var box = $('box');</p>
+    <p>$('larger').onclick = function(){</p>
+    <p>   box.style.width = "300px";</p>
+    <p>    }</p>
+    <p>    $('heighter').onclick = function(){</p>
+    <p>    box.style.height = "300px";</p>
+    <p>    }</p>
+    <p>    $('white').onclick = function(){</p>
+    <p>    box.style.backgroundColor = "white";</p>
+    <p>    }</p>
+    <p>    $('hide').onclick = function(){</p>
+    <p>    box.style.display = "none";</p>
+    <p>    }</p>
+    <p>   $('reset').onclick = function(){</p>
+    <p>    box.style.display = "block";</p>
+    <p>    box.style.width = "200px";</p>
+    <p>    box.style.height = "200px";</p>
+    <p>   box.style.backgroundColor = "#000";</p>
+    <p>    }</p>
+
+</div>
+<div class="code2">
+    <h2>第二种实现方式</h2>
+    <p>function changeStyle(elem,attr,value){</p>
+    <p>elem.style[attr] = value;</p>
+    <p>}</p>
+    <p>window.onload = function ()</p>
+    <p>{</p>
+    <p>var oBtn = document.getElementsByTagName("input");</p>
+    <p>var oDiv = $("box2");</p>
+    <p>var oAtt = ["width","height","background","display","display"];</p>
+    <p>var oVal = ["300px","300px","red","none","block"];</p>
+
+    <p>for (var i = 0; i < oBtn.length; i++)</p>
+    <p>{</p>
+    <p>oBtn[i].index = i;</p>
+    <p>oBtn[i].onclick = function ()</p>
+    <p>{</p>
+    <p>console.log(this.index,oBtn.length-1,oDiv.style.cssText)</p>
+    <p>//这里需要判断index，如果是最后一个重置按钮的话，新设置的div的cssText设置为""</p>
+    <p>this.index == oBtn.length - 1 && (oDiv.style.cssText = "");  //== > && </p>
+    <p>changeStyle(oDiv, oAtt[this.index], oVal[this.index])</p>
+    <p>}</p>
+    <p>}</p>
+    <p>};</p>
+</div>
+
+</body>
+</html>
