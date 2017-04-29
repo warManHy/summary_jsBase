@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>简单分页算法</title>
+</head>
+<body>
+	<button id="btn">up</button>
+	<button id="btn1">down</button>
+	<script>
+		var btn = document.getElementById('btn');
+		var btn1 = document.getElementById('btn1');
+
+		var arr =[1,2,3,4,5,6,7,8,9,10,11,
+					12,13,14,15,16,17,18,19,20,21,22,
+					23,24,25,26,27,28,29,30,31,32,33
+				];
+
+	</script>
+	<script>
+		var allPage;
+		var pageNow=1;
+		var indexPage;
+		var arrLen = arr.length;
+		var num = 10;
+		if(arrLen%num!=0){
+			allPage = Math.floor(arrLen/num)+1;
+		}else{
+			allPage = Math.floor(arrLen/num);
+		}
+
+		btn.onclick = function(){
+			pageNow--;
+			if(pageNow<=0){
+				pageNow=1;
+			}
+
+			if(pageNow==1){
+				indexPage = 9;
+				console.log(arr.slice(0,num))
+			}else{
+				indexPage = (pageNow-1)*num;
+				console.log(arr.slice(indexPage,indexPage+num))
+			}			
+
+		};
+		btn1.onclick = function(){
+			pageNow++;
+			if(pageNow>allPage){
+				pageNow = allPage;
+			}
+
+			if(pageNow==1){
+				indexPage = 9;
+				console.log(arr.slice(0,num))
+			}else if(pageNow == allPage){
+				indexPage = (pageNow-1)*num;
+				console.log(arr.slice(indexPage,arrLen-1))
+			}else{
+				indexPage = (pageNow-1)*num;
+				console.log(arr.slice(indexPage,indexPage+num))
+			}	
+
+		};
+	</script>
+</body>
+</html>

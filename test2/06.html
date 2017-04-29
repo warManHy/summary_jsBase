@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+body,html{padding: 0;margin: 0;font-size: 14px;color:#000;}
+.leftDiv{float:left;}
+.rightDiv{float: right;width: 600px;}
+table {border-collapse: collapse;width:600px;table-layout: fixed;}
+td,th {border: 1px solid #e1e1e1;padding: 0;height: 20px;line-height: 20px;text-align: center;}
+.current{color:red;}
+</style>
+<body>
+    <div class="leftDiv">
+        <h1>简单日历</h1>
+        <input type="text" id="btn" placeholder="2017,4">
+        <button id="button">输入</button>
+        <table>
+            <thead>
+                <tr><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th><th>日</th></tr>
+            </thead>
+            <tbody>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="rightDiv">
+        <h1>知识点</h1>
+        1. var nstr=new Date(year,month-1); //当前Date资讯<br>
+        输出例子 ： Wed Feb 01 2017 00:00:00 GMT+0800 (中国标准时间)<br>
+        <br>
+        2. var n1str=new Date(ynow,mnow,1); //当月第一天Date资讯<br>
+            var firstday=n1str.getDay() //获取星期几 <br> 
+        <br>
+        3.判断二月的日期<br>
+        function is_leap(year) { <br>
+            return (year%100==0?res=(year%400==0?1:0):res=(year%4==0?1:0));<br>
+        } <br>
+        <br>
+        4.思路:
+        获取的月份，日期，星期，判断二月，输入当月的所有天数
+        <br>
+        <a href="http://www.w3school.com.cn/jsref/jsref_obj_date.asp">Date——W3C</a>
+    </div>
+<script>
+var btn = document.getElementById('btn');
+var button = document.getElementById('button');
+button.onclick = function(){
+
+	var btnVal  = btn.value.trim();
+	var sliceStr = btnVal.split(",");
+	var arugument1 = sliceStr[0];
+	var arugument2 = sliceStr[1];
+    if(arugument2>12 || arugument2<1){
+        alert("输入失败！");
+    }else{
+        calendar(arugument1,arugument2);
+    }
+	
+
+};
+
+function calendar(year,month) {
+
+    //输入的日期
+    var nstr=new Date(year,month-1); //当前Date资讯
+    var ynow=nstr.getFullYear(); //年份
+    var mnow=nstr.getMonth(); //月份
+    //var dnow=nstr.getDate(); //今日日期
+    var n1str=new Date(ynow,mnow,1); //当月第一天Date资讯
+    var firstday=n1str.getDay(); //当月第一天星期几
+
+    //今天的日期
+    var now = new Date();
+    var now1 = now.getDate();
+    var nowMonth = now.getMonth();
+  
+    
+
+   var m_days=new Array(31,28+is_leap(ynow),31,30,31,30,31,31,30,31,30,31); //各月份的总天数
+   var tds = document.getElementsByTagName("td");
+   for(var k=0;k<tds.length;++k){
+			tds[k].innerHTML = "";
+	}
+	console.log( firstday )
+    if( firstday==0 ){ 
+        //星期日
+        for(var i=firstday,j=0;i<m_days[month-1],j<m_days[month-1];++i,++j){
+                tds[i+6].innerHTML = j+1;
+        }
+    }else{
+        for(var i=firstday,j=0;i<m_days[month-1],j<m_days[month-1];++i,++j){
+                tds[i-1].innerHTML = j+1;
+        }
+    }
+
+	if(mnow==nowMonth){
+		tds[now1+firstday-2].className="current";
+	}else{
+        tds[now1+firstday-2].className="";
+    }
+	
+    
+    
+}
+function is_leap(year) { 
+   return (year%100==0?res=(year%400==0?1:0):res=(year%4==0?1:0));
+} //是否为闰年
+</script>
+</body>
+</html>

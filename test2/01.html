@@ -4,7 +4,33 @@
     <meta charset="UTF-8">
     <title>百度输入法</title>
 </head>
+<style>
+    .inputDiv{width: 80px;height: 100px;border: 1px solid #00ce0d;display: none}
+    ul{padding: 0;}
+    li{list-style: none;border-bottom: 1px solid #000000;cursor: pointer;}
+    li:hover{background-color: #a8a8a2;}
+</style>
 <body>
-
+<input type="button" id="btn" value="点击">
+<div class="inputDiv">
+    <ul>
+        <li>韩严</li>
+        <li>严寒</li>
+        <li>酷暑</li>
+    </ul>
+</div>
+<script>
+    var btn =document.getElementById("btn");
+    var inputDiv = document.getElementsByClassName("inputDiv")[0];
+    var flag = false;
+    btn.onclick = function(){
+        flag  = !flag;
+        if(flag){
+            inputDiv.style.display = "block";
+        }else{
+            inputDiv.style.display = "none";
+        }
+    };
+</script>
 </body>
 </html>

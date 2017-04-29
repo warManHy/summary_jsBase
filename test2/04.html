@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dialog</title>
+</head>
+<style>
+    .mask{
+        width: 100%;
+        height:100%;
+        background-color: #00AAAA;
+        position: absolute;
+        bottom: 0;
+        left:0;
+        display: none;
+    }
+    .dialogDiv{
+        width: 500px;
+        height:400px;
+        background-color: #4ebd79;
+        position: absolute;
+        left:0;
+        top:0;
+        z-index: 99999;
+        display: none;
+    }
+    .header{
+        width: 100%;
+        height:40px;
+        background-color: #fff000;
+        color: #7a43b6;
+        text-align: center;
+        cursor: all-scroll;
+    }
+</style>
+<body>
+    <input type="button" value="click" id="btn">
+    <div class="mask" id="mask"></div>
+    <div class="dialogDiv" id="dialogDiv">
+        <div class="header" id="header"></div>
+    </div>
+    <script>
+        var btn = document.getElementById("btn");
+        var mask = document.getElementById("mask");
+        var dialogDiv = document.getElementById("dialogDiv");
+        var header = document.getElementById("header");
+
+        btn.onclick = function(){
+          mask.style.display = "block";
+          dialogDiv.style.display ="block";
+        };
+        mask.onclick = function(){
+            mask.style.display = "none";
+            dialogDiv.style.display ="none";
+        };
+        var mouseX=0,mouseY=0;
+        var disX=0,disY=0;
+        var flag =false;
+        header.onmousedown = function(event){
+            var ev = event ? event: window.event;
+            flag = !flag;
+            mouseX = ev.clientX;
+            mouseY = ev.clientY;
+            //console.log(mouseX)
+        };
+        header.onmousemove = function(event){
+            if(flag){
+                var ev = event ? event: window.event;
+                var nowX = ev.clientX;
+                var nowY = ev.clientY;
+                 disX = nowX-mouseX;
+                 disY = nowY-mouseY;
+                if(disX<0){
+                    disX=0;
+                }
+                if(disX>document.clientHeight){
+                    disx = document.clientHeight;
+                }
+                if(disY<0){
+                    disY=0;
+                }
+                dialogDiv.style.left = disX+"px";
+                dialogDiv.style.top = disY+"px";
+
+            }
+
+
+        };
+        header.onmouseup = function(){
+            flag = false;
+            dialogDiv.style.left = disX+"px";
+            dialogDiv.style.top = disY+"px";
+        };
+    </script>
+</body>
+</html>

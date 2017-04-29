@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组求和</title>
+</head>
+<body>
+    <input type="text" id="sumArr">
+    <p id="pText"></p>
+    <button id="btn">求和</button>
+    <script>
+        var sumArr = document.getElementById("sumArr");
+        var pText = document.getElementById("pText");
+        var btn = document.getElementById("btn");
+        btn.onclick = function(){
+            var sumArrVal = sumArr.value;
+            var arr = sumArrVal.split(",");
+            var sum = 0;
+            for(var i=0;i<arr.length;i++){
+                sum += parseInt(arr[i]);
+            }
+            pText.innerHTML = sum;
+        };
+    </script>
+</body>
+</html>

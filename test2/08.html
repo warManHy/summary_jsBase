@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>选项卡</title>
+</head>
+<style>
+	.div{
+		width:500px;
+		height: 400px;
+		border: 1px solid #eee;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	.title{
+		width: 100%;
+		height: 10%;
+		background: #eee;
+		position: absolute;
+		top: 0;
+	}
+	span{
+		display: inline-block;
+		border-right: 1px solid #000;
+		width: 32.5%;
+		height: 100%;
+		cursor: pointer;
+	}
+	.div1,.div2,.div3{
+		width:100%;
+		height: 90%;
+		position: absolute;
+		top: 10%;
+	}
+	.div1{
+		background-color: red;
+		z-index: 999;
+	}
+	.div2{
+		background-color: green;
+	}
+	.div3{
+		background-color: blue;
+	}
+	.right{position: absolute;right: 0;top: 0;width: 600px;}
+</style>
+<body>
+	<div class="div">
+		<div class="title">
+			<span class="tag">01</span>
+			<span class="tag">02</span>
+			<span class="tag">03</span>
+		</div>
+		<div class="div1 d"></div>
+		<div class="div2 d"></div>
+		<div class="div3 d"></div>
+	</div>
+
+	<div class="right">
+	<textarea name="" id="" cols="80" rows="14">
+	
+var tag = document.getElementsByClassName('tag');
+var d = document.getElementsByClassName("d");
+for(var i=0;i<tag.length;i++){
+	tag[i].index = i;
+	tag[i].onclick = function(){
+
+		var _index = this.index;
+		for(var j=0;j<d.length;j++){
+			d[j].style.zIndex = "0";
+		}
+		d[_index].style.zIndex = "9999"; 
+	}
+}
+
+	</textarea>
+
+	<textarea name="" id="" cols="80" rows="14">
+var tag = document.getElementsByClassName('tag');
+var d = document.getElementsByClassName("d");
+for(var i=0;i<tag.length;i++){
+		(function(i){
+			tag[i].onclick=function(){
+				for(var j=0;j<d.length;j++){
+					d[j].style.zIndex = "0";
+				}
+				d[i].style.zIndex="9999";
+			}
+		})(i);
+}
+	</textarea>
+	
+	<textarea name="" id="" cols="80" rows="14">
+var tag = document.getElementsByClassName('tag');
+var d = document.getElementsByClassName("d");
+tagChange(tag,d)
+function tagChange(tag,tagDiv){
+	for(var i=0;i<tag.length;i++){
+		(function(i){
+			tag[i].onclick=function(){
+				for(var j=0;j<tagDiv.length;j++){
+					tagDiv[j].style.zIndex = "0";
+				}
+				tagDiv[i].style.zIndex="9999";
+			}
+		})(i);
+	}
+}
+	</textarea>
+	</div>
+
+	<script>
+		var tag = document.getElementsByClassName('tag');
+		var d = document.getElementsByClassName("d");
+		tagChange(tag,d)
+		function tagChange(tag,tagDiv){
+			for(var i=0;i<tag.length;i++){
+				(function(i){
+					tag[i].onclick=function(){
+						for(var j=0;j<tagDiv.length;j++){
+							tagDiv[j].style.zIndex = "0";
+						}
+						tagDiv[i].style.zIndex="9999";
+					}
+				})(i);
+			}
+		}
+	</script>
+</body>
+</html>

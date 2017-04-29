@@ -1,0 +1,42 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>判断键盘按下事件</title>
+</head>
+<body>
+<div class="span" id="showHtml"></div>
+<input type="text" onkeydown="return noNumbers(event)" id="input" value=" " />
+<div class="info">
+	<h5>键盘事件事件应用</h5>
+	<p>玩游戏的时候，不同的按键代表不同的事件触发</p>
+</div>
+
+<script type="text/javascript">
+
+var showHtml = document.getElementById('showHtml');
+var input = document.getElementById('input');
+function noNumbers(e)
+{
+    var keynum;
+    var keychar; 
+
+    keynum = window.event ? e.keyCode : e.which;
+    keychar = String.fromCharCode(keynum);
+    if(keynum==123){
+    		return false;
+    }
+    if(keynum==38){
+    	alert("向上");
+    }
+
+    if(input.value==""){
+    	showHtml.innerHTML = "";
+    }else{
+    	showHtml.innerHTML = keynum+':'+keychar ;
+    }
+   
+}
+
+</script>
+</body>
+</html>
