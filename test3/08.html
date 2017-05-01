@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>时钟</title>
+</head>
+<style>
+	#clock{
+		width: 400px;
+		padding: 20px;
+		background-color: #000;
+		color: #fff;
+	}
+	span{
+		display: inline-block;
+		width: 60px;
+		height: 30px;
+		background: #fff;
+		color: #000;
+	}
+	#css3Clock{
+		width: 400px;
+		height: 400px;
+		border-radius: 200px;
+		border: 1px solid #000;
+		position: relative;
+	}
+	.centerDot{
+		width: 20px;
+		height: 20px;
+		border-radius: 10px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-left: -10px;
+		margin-top: -10px;
+		background: #3a8adc;
+	}
+	.hour-line{
+		position: absolute;
+	    width: 100px;
+	    height: 4px;
+	    background: #35cc04;
+	    top: 198px;
+	    right: 200px;
+	    transform-origin: 100% 50%;
+	    transform: rotate(30deg);
+	}
+	.minute-line{
+	    position: absolute;
+	    width: 160px;
+	    height: 2px;
+	    background: #f60;
+	    top: 198px;
+	    right: 180px;
+	    transform-origin: 0% 50%;
+	}
+	.second-line{
+	    position: absolute;
+	    width: 180px;
+	    height: 2px;
+	    background: #000;
+	    top: 198px;
+	    right: 200px;
+	    transform-origin: 100% 50%;
+	    transform: rotate(60deg);
+	}
+</style>
+<body>
+	<h3>简单版</h3>
+	<div id="clock">
+		<span></span>点
+		<span></span>分
+		<span></span>秒
+	</div>
+	<h3>钟表版（css3）</h3>
+	<div id="css3Clock">
+		<div class="centerDot"></div>
+		<div class="hour-line"></div>
+		<div class="minute-line"></div>
+		<div class="second-line"></div>
+	</div>
+
+	<h3>canvas版</h3>
+
+	<script type="text/javascript">
+		var clock = document.getElementById('clock');
+		var oSpan = document.getElementsByTagName('span');
+
+		setInterval(getTimes,1000);
+		getTimes();
+		function getTimes(){
+			var oDate = new Date();
+			var aDate = [oDate.getHours(),oDate.getMinutes(),oDate.getSeconds()];
+			aDate.forEach(function(item,index){
+				oSpan[index].innerHTML= format(item);
+			});
+		}
+		//时期格式化函数，如果是个位数，加个0
+		function format(a)
+		{
+			return a.toString().replace(/^(\d)$/, "0$1");	
+			
+			/*if(/^\d{1}$/.test(a)){
+				return "0"+a;
+			}else{
+				return a;
+			}*/
+		}
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js判断是否为整数类型方式</title>
+</head>
+<body>
+	<a href="http://www.jb51.net/article/75813.htm">参考</a>
+	<h3>1.使用取余运算符判断</h3>
+	<span>有个问题是例如3.0判断依然是true</span>
+	<button>点击1</button><button>点击2</button>
+
+	<h3>2.使用Math.round、Math.ceil、Math.floor判断</h3>
+	<p>有个问题是例如3.0判断依然是true</p>
+	<button>点击1</button><button>点击2</button>
+
+	<h3>3.使用pasetInt(超过js数字大小会报错)</h3>
+	<p>有个问题是例如3.0判断依然是true</p>
+	<span>function isInteger(obj) {return parseInt(obj, 10) === obj}</span>
+
+	<h3>4.通过位运算判断</h3>
+	<a href="http://www.w3school.com.cn/js/pro_js_operators_bitwise.asp">位运算</a><span>toString(2)转为二进制</span>
+	<p>有个问题是例如3.0判断依然是true</p>
+	<span>function isInteger(obj) {return (obj | 0) === obj }</span>
+
+	<h3>5.ES6提供了Number.isInteger</h3>
+	<p>有个问题是例如3.0判断依然是true</p>
+	<span>Number.isInteger(num)?整数:非整数</span>
+	<script>
+
+		var btns = document.getElementsByTagName('button');
+		btns[0].onclick = function(){ alert(isInteger(3));  };
+		btns[1].onclick = function(){ alert(isInteger(3.3));  };
+		function isInteger(obj) {
+		 return obj%1 === 0
+		}
+
+		btns[2].onclick = function(){ alert(isInteger1(3.0)) };
+		btns[3].onclick = function(){ alert(isInteger1(3.5)) };
+		function isInteger1(obj) {
+		 return Math.floor(obj) === obj
+		}
+
+	</script>
+</body>
+</html>

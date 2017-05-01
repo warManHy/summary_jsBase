@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>累加</title>
+</head>
+<body>
+	<button>一直加</button>
+	<p></p>
+	<script>
+		var btn = document.getElementsByTagName('button');
+		var p = document.getElementsByTagName('p');
+		var startNum = 0;
+		btn[0].onclick = function(){
+			startNum = startNum+1;
+			p[0].innerHTML = startNum;
+		};
+	</script>
+	<button>只加一下</button>
+	<p></p>
+	<script>
+		var num  = 0;
+		btn[1].onclick = function(){
+			p[1].innerHTML = num+1;
+		}
+	</script>
+	<p>原因</p>
+	第一个在点击事件中把 num 增加的后值存下了，第二个点击完后又会取num=0的值。
+</body>
+</html>

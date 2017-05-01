@@ -4,7 +4,79 @@
 	<meta charset="UTF-8">
 	<title>js年历简单版</title>
 </head>
+<style>
+	.center{
+		width: 400px;
+		height: auto;
+		margin:0 auto;
+	}
+	.rili ul{margin:0;padding: 0;}
+	.rili li{
+		list-style: none;
+		display: inline-block;
+		width: 126px;
+		height:80px;
+		border: 2px solid #000;
+		margin-top: 2px;
+	}
+	.info{
+		width: 100%;
+		height: 120px;
+		border: 2px solid #000;
+		margin-top: 10px;
+	}
+	.current{ background-color: #eee;color: green; }
+</style>
 <body>
-	
+	<div class="center">
+		<h3>js年历简单版</h3>
+		<div class="rili">
+			<ul>
+				<li><strong>1月</strong></li>
+				<li><strong>2月</strong></li>
+				<li><strong>3月</strong></li>
+				<li><strong>4月</strong></li>
+				<li><strong>5月</strong></li>
+				<li><strong>6月</strong></li>
+				<li><strong>7月</strong></li>
+				<li><strong>8月</strong></li>
+				<li><strong>9月</strong></li>
+				<li><strong>10月</strong></li>
+				<li><strong>12月</strong></li>
+				<li><strong>12月</strong></li>
+			</ul>
+		</div>
+		<div class="info">
+			"元旦：1月1日至3日放假三天。"
+		</div>
+	</div>
 </body>
+<script>
+	var lis = document.getElementsByTagName('li');
+	var info = document.getElementsByClassName('info')[0];
+	var arr = [
+		"元旦：1月1日至3日放假三天。",
+		"春节：2月2日至8日放假7天。",
+		"妇女节：3月8日妇女节，与我无关。",
+		"清明节：4月3日至5日放假3天",
+		"劳动节：4月30日至5月2日放假3天。",
+		"端午节：6月4日至6日放假3天。",
+		"小暑：7月7日小暑。不放假。",
+		"七夕节：8月6日七夕节。不放假。",
+		"中秋节：9月10日至12日放假3天。",
+		"国庆节：10月1日至7日放假7天。",
+		"立冬：11月8日立冬。不放假。",
+		"艾滋病日:12月1日<br />废除奴隶制国际日:12月2日。"
+	];
+	for(var  i=0;i<lis.length;i++){
+		lis[i].index = i;
+		lis[i].onmouseover = function(){
+			for(var j=0;j<lis.length;j++) lis[j].className="";
+			this.className = "current";
+			info.innerHTML = arr[this.index];
+		};
+
+	}
+	
+</script>
 </html>

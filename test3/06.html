@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>判断数字的位数</title>
+</head>
+<body>
+	<input type="text"><button>按钮</button>
+	<script>
+		var input = document.getElementsByTagName('input');
+		var btn = document.getElementsByTagName("button");
+		btn[0].onclick = function(){
+			var inputVal = input[0].value;
+			var dotIndex  = inputVal.indexOf('.');
+			if(dotIndex>0){
+				var beforeDot = inputVal.slice(0,dotIndex);
+				alert(beforeDot.length)
+			}else{
+				alert(inputVal.length);
+			}
+			
+		};
+	</script>
+</body>
+</html>

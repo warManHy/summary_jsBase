@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>倒计时</title>
+</head>
+<style>
+	.countDown,.countDown1{
+		width: 500px;
+		background: #eee;
+		border: 2px solid #000;
+		margin:0 auto;
+		padding: 30px;
+		margin-bottom: 10px;
+	}
+	input{background: green;color: #fff;border: none;padding: 10px;}
+	span{width: 80px;height: 40px; display: inline-block;background: #fff;}
+</style>
+<body>
+	<div class="countDown">
+		<span>01</span>分<span>40</span>秒
+		<input type="button" value="启动">
+		<input type="button" value="关闭">
+	</div>
+	<script type="text/javascript">
+		var countDown = document.getElementsByClassName('countDown');
+		var oSpan = document.getElementsByTagName('span');
+		var btn = document.getElementsByTagName('input');
+		var timer = null;
+		btn[0].onclick = function(){
+			timer = setInterval(update,1000);
+			update(); //加这个立即更新
+		};
+		btn[1].onclick = function(){
+			clearInterval(timer);
+		};
+		function update(){
+		
+			var span1 = oSpan[0];
+			var span2 = oSpan[1];
+			var allTime = span1.innerHTML.replace(/^0/,"")*60 + parseInt(span2.innerHTML.replace(/^0/,""));
+			
+			if(allTime<=0){
+				clearInterval(timer);
+				return;
+			}
+			allTime--;
+			span1.innerHTML = format(parseInt((allTime/60)));
+			allTime %= 60;
+			span2.innerHTML = format(parseInt(allTime));
+		}
+		function format(a)
+		{	
+			//这个正则是 如果一个数字是以各位数，加个0 例如：0->00   2->02
+			//        /^(\d)$/  匹配个位数         $1匹配前一个项目   0$1 替换 0+前一项
+			return a.toString().replace(/^(\d)$/,'0$1');
+		}
+	</script>
+</body>
+</html>	

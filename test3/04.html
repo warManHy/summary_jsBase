@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>加到10再减</title>
+</head>
+<style>
+	p{
+		background-color: #eee;
+		width: 200px;
+		height: 200px;
+		color: #3f51b5;
+		font-size: 80px;
+	}
+</style>
+<body>
+	<p></p>
+	<script>
+		var p = document.getElementsByTagName('p');
+		var num = 0;
+		loop();
+		function loop(){
+			var timer = setInterval(function(){
+				num++;
+				if(num>10){
+					num = 10;
+					clearInterval(timer);
+					var timer1 = setInterval(function(){
+						num--;
+						if(num<1){
+							num=1;
+							clearInterval(timer1);
+							loop();
+						}
+						p[0].innerHTML = num;
+					},1000);
+				}
+				p[0].innerHTML = num;
+			},1000);			
+		}
+	</script>
+</body>
+</html>

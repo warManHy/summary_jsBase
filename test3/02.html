@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>parseInt等数字api</title>
+</head>
+<style>
+	pre{background-color:#3871ea;color:#fff;width: 500px;font-size: 16px;}
+</style>
+<body>
+	<h3>parseInt（鼠标离开input后显示）</h3>
+	<input type="text" id="num">
+	<p id="outNum"></p>
+	<p id="outPar"></p>
+	<h3>Math.ceil,Math.floor</h3>
+	<p>ceil向上取整</p>
+	<p>floor向下取整（很好记，floor地板，在底下，所有向下取整）</p>
+	<input type="text" id="ceil"><button>ceil</button>
+	<input type="text" id="floor"><button>floor</button>
+	<h3>ceil的实现(floor同理)</h3>
+	<button>显示</button>
+	<pre>
+	function myCeil(num){
+	var num = num.toString();
+	//num = num + "";
+	var dottIndex = num.indexOf('.');
+	var firstNum = num.slice(0,dottIndex);
+	var lastNum = num.slice(dottIndex+1,dottIndex+2);
+	firstNum = Number(firstNum);
+	lastNum = Number(lastNum);
+	var flag;
+	var outnum;
+	/*if(lastNum>=5){
+		flag = 1;
+	}else{
+		flag =0;
+	}*/
+	lastNum>=5 ? flag=1: flag=0; 
+	outnum = firstNum+flag
+	return outnum;
+	}
+	</pre>
+	<script>
+		var num = document.getElementById('num');
+		var outNum = document.getElementById('outNum');
+		var outPar = document.getElementById('outPar');
+		num.onchange = function(){
+			outNum.innerHTML = num.value;
+			outPar.innerHTML = parseInt(num.value);
+		}
+
+		var ceil = document.getElementById("ceil");
+		var floor = document.getElementById("floor");
+		var btn = document.getElementsByTagName('button');
+		btn[0].onclick = function(){
+			alert(Math.ceil(ceil.value));
+		};
+		btn[1].onclick = function(){
+			alert(Math.floor(floor.value));
+		};
+
+		btn[2].onclick = function(){
+			var a = myCeil(15.3);
+			alert(a);
+		}
+
+		function myCeil(num){
+			var num = num.toString();
+			//num = num + "";
+			var dottIndex = num.indexOf('.');
+			var firstNum = num.slice(0,dottIndex);
+			var lastNum = num.slice(dottIndex+1,dottIndex+2);
+			firstNum = Number(firstNum);
+			lastNum = Number(lastNum);
+			var flag;
+			var outnum;
+			/*if(lastNum>=5){
+				flag = 1;
+			}else{
+				flag =0;
+			}*/
+			lastNum>=5 ? flag=1: flag=0; 
+			outnum = firstNum+flag
+			return outnum;
+		}
+	</script>
+</body>
+</html>

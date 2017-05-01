@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>网页计算器</title>
+</head>
+<style>
+	ul{
+		margin: 0;
+		padding: 0;
+	}
+	li{list-style: none;display: inline-block;width: 80px;border: 1px solid #000;padding: 10px;margin:6px;}
+	li:hover{background:#4caf50;color: #fff;cursor: pointer;}
+	.calc{
+		width: 500px;
+		height: 375px;
+		border:1px solid #ccc;
+		position: relative;
+	}
+	.showNum{
+		width: 100%;
+		height: 50px;
+		border-bottom: 1px solid #ccc;
+	}
+	.showNum{
+		text-align: right;
+		font-size: 26px;
+		font-weight: bold;
+		line-height: 50px;
+	}
+	.calcDiv{
+		width: 100%;
+		height: 450px;
+	}
+	.li-1{
+		background: #1855c7;
+		color: #fff;
+	}
+	.li-2{
+		height: 86px;
+		position:absolute;
+		right: 30px;
+	}
+	.li-3,.li-4,.li-5{
+		position: absolute;
+		bottom: 40px;
+	}
+	.li-3{
+		left:0;
+	}
+	.li-4{
+		left:240px;
+	}
+	.li-5{
+		left: 120px;
+	}
+</style>
+<body>
+	<h3>简单版</h3>
+	<input type="text" id="simple" placeholder="1+1"><button>计算</button>
+
+	<h3>一般版(有个bug，是小数点的问题，还有可能弄出来八进制的问题)</h3>
+	<div class="calc">
+		<div class="showNum">0</div>
+		<div class="calcDiv">
+			<ul>
+				<li class="li-1">C</li>
+				<li class="li-1">%</li>
+				<li class="li-1">/</li>
+				<li class="li-1">*</li>
+				<li>7</li>
+				<li>8</li>
+				<li>9</li>
+				<li>-</li>
+				<li>6</li>
+				<li>5</li>
+				<li>4</li>
+				<li>+</li>
+				<li>3</li>
+				<li>2</li>
+				<li>1</li>
+				<li class="li-2">=</li>
+				<li class="li-3">0</li>				
+				<li class="li-4">.</li>
+				<li class="li-5">back</li>
+			</ul>
+		</div>
+	</div>
+
+	<h3>正则版本</h3>
+	<script>
+		var simple = document.getElementById('simple');
+		var btn = document.getElementsByTagName('button');
+		btn[0].onclick = function (){
+				var simpleVal = simple.value;
+				var newStrArr = simpleVal.split('');
+				newStrArr.forEach(function(item,index){
+
+					if(item=="+"){
+						var before = simpleVal.slice(0,index);
+						var after = simpleVal.slice(index+1);
+						before = Number(before);
+						after = Number(after);
+						alert(before+after)
+					}
+					if(item=="-"){
+						var before = simpleVal.slice(0,index);
+						var after = simpleVal.slice(index+1);
+						before = Number(before);
+						after = Number(after);
+						alert(before-after)
+					}
+					if(item=="*"){
+						var before = simpleVal.slice(0,index);
+						var after = simpleVal.slice(index+1);
+						before = Number(before);
+						after = Number(after);
+						alert(before*after)
+					}
+					if(item=="/"){
+						var before = simpleVal.slice(0,index);
+						var after = simpleVal.slice(index+1);
+						before = Number(before);
+						after = Number(after);
+						alert(before/after)
+					}
+
+				});
+
+		};
+	</script>
+	<script type="text/javascript">
+		var showNum = document.getElementsByClassName("showNum")[0];
+		var lis = document.getElementsByTagName('li');
+		for(var i=0;i<lis.length;i++){
+
+			var finHtml = [];
+			var finShowHtml="";
+			
+			lis[i].onclick = function(){
+				
+				//console.log(this.innerHTML);
+				var thisHtml = this.innerHTML;
+
+				if( thisHtml=="+" ||  thisHtml=="-" || thisHtml=="*" || thisHtml=="/" || thisHtml=="%"){
+					document.getElementsByClassName("li-2")[0].id="";
+					var reg1 = /^(-)?\d/;
+					//最后一位为操作符时
+					if( !reg1.test(finHtml[finHtml.length-1]	) ){  						
+						showNum.innerHTML = finShowHtml;
+					}else{
+						finHtml.push(thisHtml);
+						finShowHtml = finHtml.join("");
+						showNum.innerHTML =  finShowHtml;
+					}
+					console.log("-",finHtml)
+
+				}else if( thisHtml=="C" ){
+
+					showNum.innerHTML ="0";
+					finHtml = [];
+
+				}else if( thisHtml=="=" ){
+				
+
+					var reg = /^(-)?\d/;
+					//最后一位为操作符时
+					if( !reg.test(finHtml[finHtml.length-1]	) ){  
+						showNum.innerHTML = "输入错误！";
+					}else{
+						
+						calcNum = eval(finShowHtml)
+						if( String(calcNum).indexOf(".") < 0 ){
+							showNum.innerHTML = calcNum;
+							finHtml= [String(calcNum)];
+						}else{
+							showNum.innerHTML = calcNum.toFixed(7);
+							finHtml= [String(calcNum.toFixed(7))];
+						}
+
+						this.id ="hy";
+						
+					}
+					console.log("=",finHtml)
+					
+
+				}else if(  thisHtml=="." ){
+					
+					if( finHtml.length ==0 ){  
+						finHtml.unshift("0");
+						finHtml.push(".");
+					}else{
+						//整数
+						var reg2 =/^(-)?\d/;
+						if( reg2.test(finHtml[finHtml.length-1] ) ){
+							finHtml.push(thisHtml);
+							finShowHtml = finHtml.join("");
+						}
+						showNum.innerHTML = finShowHtml;	
+						
+					}	
+					console.log(".",finHtml)
+
+				}else if( thisHtml=="back" ){
+
+						finHtml.pop();
+						finShowHtml = finHtml.join(str);
+						showNum.innerHTML = finShowHtml;
+
+				}else{
+
+					if(document.getElementsByClassName("li-2")[0].id=="hy"){
+						calcNum = null;
+						finHtml= [];
+						finHtml.push(thisHtml);
+						str="";
+						finShowHtml = finHtml.join(str);
+						showNum.innerHTML = finShowHtml;
+						document.getElementsByClassName("li-2")[0].id="";
+
+					}else{
+
+						finHtml.push(thisHtml);
+						str="";
+						finShowHtml = finHtml.join(str);
+						showNum.innerHTML = finShowHtml;		
+					}
+
+
+
+				}
+				
+				
+			}
+		}
+	</script>
+</body>
+</html>

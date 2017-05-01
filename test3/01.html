@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js判断数据类型</title>
+</head>
+<style>
+	body{display: flex;}
+	pre{background: #eee;color: blue;padding: 10px;width: 500px;margin-left: 20px;font-size: 14px;}
+</style>
+<body>
+	<pre>
+判断js的数据类型
+1.typeof 
+&lt script &gt
+	var arr = [];
+	console.log(typeof arr); //object
+	var num = 12;
+	console.log(typeof num); //number
+	var str = "han";
+	console.log(typeof str); //string
+	var boolean = true;
+	console.log(typeof boolean); //boolean
+	var obj = {};
+	console.log(typeof obj); //object 
+	console.log(typeof undefined); //undefined
+	console.log(typeof null); //object  不代表null是对象
+	var fn = function(){}
+	console.log(typeof fn) //function
+&lt /script &gt
+2.instanceof 
+&lt script &gt
+	var arr = [];
+	console.log( arr instanceof Array); //true
+	var num = 12;
+	console.log( num instanceof Number); //false
+	var str = "han";
+	console.log( str instanceof String); //false
+	var boolean = true;
+	console.log( boolean instanceof Boolean); //false
+	var obj = {};
+	console.log( obj instanceof Object); //true
+	var date = new Date;
+	console.log( date instanceof Date) //true
+ &lt /script &gt
+	</pre>
+	<pre>
+1.typeof 主要用于原始值，返回值为这个值得“类型”；
+2.instanceof 主要用于对象，所有你会看到例子中有三个false;
+value instanceof Constr //如果value是一个通过Constr构造器创建的对象，true;
+其中： 
+	null instanceof Object //false
+	undefined instanceof Object //false
+3.说一下null和undefined （空值）
+	null:没有对象，使用对象时的空值
+	undefined:没有值
+	!null = true;
+	!undefined = true;
+4.布尔类型的false
+	1.undefined null
+	2.false
+	3.0,NaN
+	4.""
+	</pre>
+</body>
+<script>
+	var arr = [];
+	console.log( arr instanceof Array); //true
+	var num = 12;
+	console.log( num instanceof Number); //false
+	var str = "han";
+	console.log( str instanceof String); //false
+	var boolean = true;
+	console.log( boolean instanceof Boolean); //false
+	var obj = {};
+	console.log( obj instanceof Object); //true
+	var date = new Date;
+	console.log( date instanceof Date) //true
+</script>
+</html>
