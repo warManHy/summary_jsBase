@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>键盘控制div</title>
+</head>
+<style>
+	.box{
+		width: 100px;
+		height: 100px;
+		background: #444;
+		position: absolute;
+	}
+</style>
+<body>
+	<p>利用上下左右移动</p>
+	<div class="box"></div>
+	<script>
+		var index = 0;
+		 var box = document.getElementsByTagName('div')[0];
+	    document.onkeydown = function(e){
+
+			 var keynum;
+		    var keychar; 
+
+		    keynum = window.event ? e.keyCode : e.which;
+		    keychar = String.fromCharCode(keynum);
+	    	//console.log(keynum);	
+	    	
+	    	if(keynum==39){
+	    		index++;
+	    		box.style.left = index*20+"px";
+	    	}
+	    	if(keynum==37){
+	    		index--;
+	    		box.style.left = index*20+"px";
+	    	}
+	    	if(keynum==38){
+	    		index--;
+	    		box.style.top = index*20+"px";
+	    	}
+	    	if(keynum==40){
+	    		index++;
+	    		box.style.top = index*20+"px";
+	    	}
+
+
+	    };
+
+	</script>
+</body>
+</html>

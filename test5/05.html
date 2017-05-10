@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>select控件</title>
+</head>
+<style>
+	body{
+		width: 1000px;
+		margin:0 auto;
+	}
+	select{
+		width: 300px;
+		height: 30px;
+		font-size: 16px;
+		line-height: 30px;
+		outline: 2px solid #eee;
+		text-indent: 100px;
+	}
+	option{
+		background: #ccc;
+		color: #fff;
+	}
+	.boy{
+		width: 300px;
+		height: auto;
+	}
+	.select{
+		width: 300px;
+		height: 30px;
+		line-height: 30px;
+		text-align: center;
+		display: block;
+		border: 1px solid #ccc;
+		cursor: pointer;
+	}
+	.selectUl{
+		margin:2px 0 0 0;
+		padding: 0;
+		width: 100%;
+		border:1px solid #ccc;
+		border-bottom: none;
+		display: none;
+	}
+	.selectUl li{
+		list-style: none;
+		border-bottom: 1px solid #ccc;
+		height: 30px;
+		text-align: center;
+	}
+	.hover{
+		background: #ccc;
+	}
+</style>
+<body>
+	<h3>原生控件</h3>
+	<select name="girl" id="girl">
+		<option value="">美女1</option>
+		<option value="">美女2</option>
+		<option value="">美女3</option>
+	</select>
+	<button>取出值</button>
+	<script>
+		var btn = document.getElementsByTagName("button");
+		btn[0].onclick = function(){
+			var girl = document.getElementById('girl');
+			var options  = girl.getElementsByTagName("option");
+			var index = girl.selectedIndex; // 选中索引
+			var text = girl.options[index].text; // 选中文本
+			var value = girl.options[index].value; // 选中值
+			alert(text);
+		};
+	</script>
+	<h3>模拟控件</h3>
+	<div class="boy">
+		<form action=""><span class="select">请选择---</span></form>
+		<ul class="selectUl">
+			<li>boy1</li>
+			<li>boy2</li>
+			<li>boy3</li>
+			<li>boy4</li>
+		</ul>
+	</div>
+</body>
+<script>
+	var select = document.getElementsByClassName('select')[0];
+	var selectUl = document.getElementsByClassName('selectUl')[0];
+	var selectLis = selectUl.getElementsByTagName('li');
+	var flag = false;
+	select.onclick = function(event){
+		flag = !flag;
+		flag ? selectUl.style.display="block" : selectUl.style.display="none";
+		(event || window.event).cancelBubble = true
+	};
+	for(var i in selectLis){
+		selectLis[i].onclick = function(){
+			console.log(this.innerHTML);
+			select.innerHTML = this.innerHTML;
+			selectUl.style.display="none";
+		};
+
+		selectLis[i].onmouseover = function(){
+			this.className = "hover";
+		};
+		selectLis[i].onmouseout = function(){
+			this.className = "";
+		};
+
+	}
+</script>
+</html>

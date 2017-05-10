@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>setTimeout的使用</title>
+</head>
+<body>
+	<p>请打开控制台console查看</p>
+	<button>点击输出1-5</button>
+	<button>点击依次输出55555</button>
+	<button>点击依次输出1-5</button>
+	<p>
+		setTimeout的设计使用了event loop,所以只有等上一个事件完成，定时器的事件才会开始。
+	</p>
+	<button>setTimeout的事件机制</button>
+	<script type="text/javascript">
+		var btn = document.getElementsByTagName('button');
+
+		btn[0].onclick = function(){
+			for(var i=0;i<5;i++){
+				console.log(i)
+			}
+		};
+		btn[1].onclick = function(){
+			for(var j=0;j<5;j++){
+				setTimeout(function(){
+					console.log(j);
+				},1000*j);
+			}
+		};
+		btn[2].onclick = function(){
+			for(var z=0;z<5;z++){
+					(function(z){
+						setTimeout(function(){
+							console.log(z);
+					},z*1000)
+			})(z)
+		}
+		};
+		btn[3].onclick = function(){
+			setTimeout(function() {
+			  console.log(1)
+			}, 0);
+			new Promise(function executor(resolve) {
+			  console.log(2);
+			  for( var i=0 ; i<10000 ; i++ ) {
+			    i == 9999 && resolve();
+			  }
+			  console.log(3);
+			}).then(function() {
+			  console.log(4);
+			});
+			console.log(5);
+		}; // 23541
+	</script>
+</body>
+</html>

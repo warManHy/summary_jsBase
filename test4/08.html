@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>字符方法</title>
+</head>
+<style>
+	pre{
+		background: #333;
+		color: #fff;
+		font-size: 16px;
+		padding: 10px;
+	}
+</style>
+<body>
+	<h3></h3>
+	<script>
+		var jumpStr = "hanyan love study!";
+		var arr = [];
+		var str = "";
+		var h3 = document.getElementsByTagName("h3")[0];
+		for(var i in jumpStr){
+			//console.log(jumpStr[i]);
+			(function(i){
+				setTimeout(function(){
+					//console.log(jumpStr[i]);
+					str = str.concat(jumpStr[i]);
+					h3.innerHTML = str ;
+				},100*i);
+			})(i);
+		} 			
+	</script>
+	<p>1.大小写转化型</p>
+	<pre>
+		var str = "AAAA".toLowerCase();//转小写
+
+		var str1 = "aaaaa".toUpperCase();//转大写
+	</pre>	
+	<p>2.字符串去空格</p>
+	<pre>
+		var str = "      ";
+		str = str.trim();
+
+		var str1 = "      hanyan"; //去左边空格
+		str1 = str1.trimLeft();
+
+		var str2 = "hanyan     ";  //去右边空格
+		str2 = str2.trimRight();
+
+	</pre>
+	<p>3.搜索indexOf lastIndexOf,charAt</p>
+	<pre>
+		var str = "hanyan";
+		var index = str.indexOf("n");  //5
+
+		var lastIndex = str.lastIndexOf("n"); //2
+
+		var item = str.charAt(0); //h
+	</pre>
+	<p>4.关于编码</p>
+	<pre>
+		var str = "a";
+		str.charCodeAt(str);  //97
+		
+		var X = String.fromCharCode("88");  //X
+
+	</pre>
+	<p>5.截取字符串</p>
+	<pre>
+		//slice(start,last);
+		var str = "hanyan";
+		str.slice(0,5); //hanya
+		str.slice(1,1); //""
+
+		//substr(start,length)
+		var str = "hanyan"
+		str.substr(0,5); //hanya
+		str.substr(1,1) //a
+
+		//substring(start,stop) 不接受负值
+		var str = "hanyan";
+		str.substring(0,1) //h
+
+	</pre>
+	<p>6.连接字符串</p>
+	<pre>
+		var str = "hanyan";
+		var str1 = "love study";
+		str.concat(str1);
+	</pre>
+	<p>7.分割字符串</p>
+	<pre>
+		var str ="hanyan";
+		str.split("");  //h,a,n,y,a,n
+		var str1 ="hanyan love study";
+		str.split(" "); // hanyan love study 		
+	</pre>
+	<p>8.repalce,search,match正则使用</p>
+</body>
+</html>

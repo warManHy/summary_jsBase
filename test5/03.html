@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>鼠标事件</title>
+</head>
+<style>
+	#div{width: 50%;background: #444;color: #fff;float: left;}
+	#div1{width: 48%;background: #555;color: #fff;float: right;position: relative;}
+	.rightBox{width: 100px;height: 300px;background:#eee0;position: absolute;display: none;}
+	pre{color: #eee;font-size: 16px;}
+</style>
+<body>
+	<div id="div" onmousedown="show_coords(event)">
+		1.鼠标坐标clientX,clientY
+		<p>请在文档中点击。一个消息框会提示出鼠标指针的 x 和 y 坐标。</p>
+		<pre>
+document.getElementById('div').style.height 
+=document.getElementById('div1').style.height 
+= document.body.scrollHeight+"px";
+function show_coords(event)
+{
+	x=event.clientX
+	y=event.clientY
+	alert("X 坐标: " + x + ", Y 坐标: " + y)
+}			
+		</pre>
+	</div>
+	<div id="div1" onmousedown="mouseWhichBtn(event)">
+		2.鼠标点击事件
+		<div class="rightBox"></div>
+		<pre>
+function mouseWhichBtn(event){
+	var rightBox = document.getElementsByClassName("rightBox")[0];
+	var btnNum = event.button;
+	if(btnNum==0){
+		//左键
+		alert("您点击了左键！");
+		rightBox.style.display="none";
+	}
+	if(btnNum==1){
+		//滚轮
+		alert("您点击了滚轮！");
+	}
+	if(btnNum==2){
+		//阻止默认事件
+		document.getElementById("div1").oncontextmenu =function(){
+			return false;
+		};
+		//右键
+		var offsetL = document.getElementById("div1").offsetLeft;
+		var offsetT = document.getElementById("div1").offsetTop;
+
+		var rightBoxLeft = event.clientX - offsetL + "px";
+		var rightBoxTop = event.clientY - offsetT + "px";
+		console.log(rightBoxLeft,rightBoxTop);
+		rightBox.style.left = rightBoxLeft;
+		rightBox.style.top = rightBoxTop;
+		rightBox.style.display = "block";
+
+	}
+}			
+		</pre>
+	</div>
+</body>
+<script type="text/javascript">
+	document.getElementById('div').style.height =document.getElementById('div1').style.height = document.body.scrollHeight+"px";
+	function show_coords(event)
+	{
+		x=event.clientX
+		y=event.clientY
+		alert("X 坐标: " + x + ", Y 坐标: " + y)
+	}
+
+	function mouseWhichBtn(event){
+		var rightBox = document.getElementsByClassName("rightBox")[0];
+		var btnNum = event.button;
+		if(btnNum==0){
+			//左键
+			alert("您点击了左键！");
+			rightBox.style.display="none";
+		}
+		if(btnNum==1){
+			//滚轮
+			alert("您点击了滚轮！");
+		}
+		if(btnNum==2){
+			//阻止默认事件
+			document.getElementById("div1").oncontextmenu =function(){
+				return false;
+			};
+			//右键
+			var offsetL = document.getElementById("div1").offsetLeft;
+			var offsetT = document.getElementById("div1").offsetTop;
+
+			var rightBoxLeft = event.clientX - offsetL + "px";
+			var rightBoxTop = event.clientY - offsetT + "px";
+			console.log(rightBoxLeft,rightBoxTop);
+			rightBox.style.left = rightBoxLeft;
+			rightBox.style.top = rightBoxTop;
+			rightBox.style.display = "block";
+
+		}
+	}
+
+</script>
+</html>

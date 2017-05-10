@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件委托，事件冒泡</title>
+</head>
+<style>
+	*{margin:0;padding:0;}
+	.row-1,.row-2{display: flex;margin-bottom: 20px;}
+	h3{border-bottom: 2px solid #eee;}
+	li{list-style: none;height: 30px;border-bottom: 1px solid #eee;}
+	.weituo{width: 300px;height:350px;border:1px solid #eee;}
+	.box1{width: 100%;height: 100%;padding: 30px;box-sizing: border-box;background: #333;}
+	.box2{width: 100%;height: 100%;padding: 60px;box-sizing: border-box;background: red;}
+	span{background: #fff;}
+</style>
+<body>
+<div class="row-1">
+	<div class="weituo">
+		<h3>事件委托</h3>
+		<ul>
+			<li id="1">china</li>
+			<li id="2">china</li>
+			<li id="3">china</li>
+			<li id="4">china</li>
+			<li id="5">china</li>
+			<li id="6">china</li>
+			<li id="7">china</li>
+			<li id="8">china</li>
+			<li id="9">china</li>
+			<li id="10">china</li>
+		</ul>
+	</div>
+	<div class="weituo" id="MP">
+		<h3 id="h3">事件冒泡</h3>
+		<div class="box1" id="box1">
+			<div class="box2" id="box2">
+				<span id="span">this is a span</span>
+			</div>
+		</div>
+	</div>
+	<div class="weituo"></div>
+	<div class="weituo">
+		<a href="http://www.360doc.com/content/14/0724/15/13883922_396743210.shtml">链接1</a>
+		<a href="http://www.tuicool.com/articles/jQZj6zB">链接2</a>
+		<ul>
+			<li>target:产生事件的节点：</li>
+			<li>currentTarget:当前节点</li>
+			<li>addEventListener:false是冒泡，true是捕获</li>
+		</ul>
+	</div>
+</div>
+<div class="row-2">
+	<div class="weituo">
+		<h3>没有阻止默认的时候（点击）</h3>
+		<div class="box1" id="row-2-box1">
+			<div class="box2" id="row-2-box2">
+				<span id="row-2-span">this is a span</span>
+			</div>
+		</div>
+	</div>
+	<div class="weituo">
+		<h3>阻止默认的时候（点击1）</h3>
+		<div class="box1" id="row-2-stop-box1">
+			<div class="box2" id="row-2-stop-box2">
+				<span id="row-2-stop-span">this is a span</span>
+			</div>
+		</div>
+	</div>
+	<div class="weituo">
+		<h3>阻止默认的时候（点击2）</h3>
+		<div class="box1" id="row-2-stop1-box1">
+				<span id="row-2-stop1-span">通过判断 target === currentTarget</span>
+		</div>
+	</div>
+</div>
+<script>
+	//没有阻止默认的时候
+	document.getElementById("row-2-box1").addEventListener("click",function(){
+		alert("row-2-box1");
+	});
+	document.getElementById("row-2-box2").addEventListener("click",function(){
+		alert("row-2-box2");
+	});
+	document.getElementById("row-2-span").addEventListener("click",function(){
+		alert("a span");
+	});
+	//阻止默认的时候
+	document.getElementById("row-2-stop-box1").addEventListener("click",function(event){
+		alert("row-2-box1");
+		event.stopPropagation();
+	});
+	document.getElementById("row-2-stop-box2").addEventListener("click",function(event){
+		alert("row-2-box2");
+		event.stopPropagation();
+	});
+	document.getElementById("row-2-stop-span").addEventListener("click",function(event){
+		alert("a span");
+		event.stopPropagation();
+	});
+	
+	
+</script>
+</body>
+<script>
+	var oUl = document.getElementsByTagName('ul');
+	var weituo = document.getElementsByClassName("weituo");
+	oUl[0].onmouseover  = function(ev){
+		var ev = ev || window.event;
+		var target = ev.target || ev.srcElement;
+		//alert(target.innerHTML);
+		if(target.nodeName.toLowerCase() == "li"){
+			target.style.background = "red";
+		}
+	};
+	oUl[0].onmouseout  = function(ev){
+		var ev = ev || window.event;
+		var target = ev.target || ev.srcElement;
+		//alert(target.innerHTML);
+		if(target.nodeName.toLowerCase() == "li"){
+			target.style.background = "";
+		}
+	};
+	weituo[1].onclick = function(event){
+		var event = event || window.event;
+		weituo[2].innerHTML = "时间："+new Date(event.timeStamp)+" 产生事件的节点：" + event.target.id +" 当前节点："+event.currentTarget.id;
+		console.log("时间："+new Date(event.timeStamp)+" 产生事件的节点：" + event.target.id +" 当前节点："+event.currentTarget.id);
+	};	
+</script>
+</html>

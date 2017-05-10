@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>导航栏</title>
+</head>
+<style>
+	.downMenu{
+		width:960px;
+		height:80px;
+		margin: 0 auto;
+		background: #333;
+		font-size: 16px;
+		margin-bottom: 20px;
+	}
+	ul{margin: 0;padding: 0;}
+	li{list-style:none;float: left;}
+	a{display: block;width:100px;height: 60px;color: #fff;line-height: 60px;padding: 10px;text-decoration: none;}
+	a:hover{background-color:#6a8c18;}
+	.li-1{position: relative;}
+	.li-2{position: absolute;top: 80px;left: 0;background: #bc0b0b;display: none;}
+	.li-1:hover .li-2{ display: block; z-index: 9999;}  /* 必须在父级元素上设置*/
+	.li-21{position: relative;}
+	.li-22{position: absolute;top: 80px;left: 0;background: #bc0b0b;display: none;}
+	.li-21:hover .li-22{ display: block; z-index: 9999;}  /* 必须在父级元素上设置*/
+	.li-23{ position: absolute;top: 0;width: 120px;right: -120px;z-index: 99999;background: #ccc;display: none;}
+	.li-22 li:nth-child(1):hover .li-23{display: block;}
+
+	.li-31{position: relative;}
+	.li-32{position: absolute;top: 80px;left: 0;background: #bc0b0b;display: none;z-index: 9999;}
+	
+	.oNav{width: 120px;display: none;}
+	.oNav li{background: #bc0b0b;}
+	.oNav .li-22{display: block;}
+
+	.leftMenu{ width: 120px;height: 240px;margin: 0 auto;position: relative;}
+	.leftMenu li{ width: 100%; height: 80px;background: #333;border-bottom: 1px solid #eee;}
+	.rightItem{ position: absolute;top: 0;left:126px;width: 370px;display: none;}
+	.rightItem a{color: red;display: inline-block;}
+	.rightItem i{display: block;position: absolute;top: 10px;left:-6px;border-right:6px solid red;border-top:10px solid transparent;border-bottom:10px solid transparent;}
+</style>
+<body>
+	<div class="downMenu">
+		<ul>
+			<li class="li-1">
+				<a href="">发现音乐</a>
+				<ul class="li-2">
+					<li><a href="">发现音乐1</a></li>
+					<li><a href="">发现音乐2</a></li>
+					<li><a href="">发现音乐3</a></li>
+				</ul>
+			</li>
+			<li><a href="">我的音乐</a></li>
+			<li><a href="">朋友</a></li>
+			<li><a href="">商城</a></li>
+		</ul>
+	</div>
+
+	<div class="downMenu">
+		<ul>
+			<li class="li-21">
+				<a href="">发现音乐</a>
+				<ul class="li-22">
+					<li><a href="">发现音乐1</a>
+						<ul class="li-23">
+							<li><a href="">发现音乐11</a></li>
+							<li><a href="">发现音乐12</a></li>
+							<li><a href="">发现音乐13</a></li>
+						</ul>	
+					</li>
+					<li><a href="">发现音乐2</a></li>
+					<li><a href="">发现音乐3</a></li>
+				</ul>
+			</li>
+			<li><a href="">我的音乐</a></li>
+			<li><a href="">朋友</a></li>
+			<li><a href="">商城</a></li>
+		</ul>
+	</div>
+	
+	<div class="downMenu">
+		<ul>
+			<li class="li-31">
+				<a href="">发现音乐</a>
+				<ul class="li-32">
+					<li><a href="">发现音乐1</a></li>
+					<li><a href="">发现音乐2</a></li>
+					<li><a href="">发现音乐3</a></li>
+				</ul>
+			</li>
+			<li><a href="">我的音乐</a></li>
+			<li><a href="">朋友</a></li>
+			<li><a href="">商城</a></li>
+		</ul>
+	</div>
+	
+	<p>一般的布局方式</p>
+	<div class="downMenu">
+		<ul>
+			<li class="li-21 oLi">
+				<a href="">发现音乐</a>
+				<div class="oNav">
+					<ul class="li-22">
+						<li><a href="">发现音乐1</a></li>
+						<li><a href="">发现音乐2</a></li>
+						<li><a href="">发现音乐3</a></li>
+					</ul>
+				</div>
+			</li>
+			<li class="oLi">
+				<a href="">我的音乐</a>
+				<div class="oNav">
+					<ul>
+						<li><a href="">发现音乐aa</a></li>
+						<li><a href="">发现音乐bb</a></li>
+					</ul>
+				</div>
+			</li>
+			<li><a href="">朋友</a></li>
+			<li><a href="">商城</a></li>
+		</ul>
+	</div>
+
+	<p>超级简单版的天猫的左侧导航_^^_</p>
+	<div class="leftMenu">
+		<ul>
+			<li class="leftMenuLi"><a href="">男生</a>
+				<div class="rightItem">
+					<i></i>
+					<ul>
+						<li>
+							<a>男生1</a>
+							<a>男生1</a>
+							<a>男生1</a>
+						</li>
+						<li>
+							<a>男生1</a>
+							<a>男生1</a>
+							<a>男生1</a>
+						</li>
+						<li>
+							<a>男生1</a>
+							<a>男生1</a>
+							<a>男生1</a>
+						</li>
+						<li>
+							<a>男生1</a>
+							<a>男生1</a>
+							<a>男生1</a>
+						</li>																		
+					</ul>
+				</div>
+			</li>
+			<li class="leftMenuLi"><a href="">女生</a>
+				<div class="rightItem">
+					<i></i>
+					<ul>
+						<li>
+							<a>男生1</a>
+							<a>男生1</a>
+							<a>男生1</a>
+						</li>
+						<li>
+							<a>男生1</a>
+							<a>男生1</a>
+							<a>男生1</a>
+						</li>
+						<li>
+							<a>男生1</a>
+							<a>男生1</a>
+							<a>男生1</a>
+						</li>
+						<li>
+							<a>男生1</a>
+							<a>男生1</a>
+							<a>男生1</a>
+						</li>																		
+					</ul>
+				</div>
+			</li>
+			<li class="leftMenuLi"><a href="">美女</a></li>
+			<li class="leftMenuLi"><a href="">帅哥</a></li>
+		</ul>
+	</div>
+	<script>
+		var leftMenu = document.getElementsByClassName("leftMenu")[0];
+		var leftMenuLis = leftMenu.getElementsByClassName("leftMenuLi");
+		for(var j=0;j<leftMenuLis.length;j++){
+			leftMenuLis[j].index = j;
+			leftMenuLis[j].onmouseover = function(){
+				if(this.getElementsByClassName("rightItem")[0]){
+					var Ibox = this.getElementsByClassName("rightItem")[0].getElementsByTagName("i")[0];
+					Ibox.style.top = 10 + this.index*80 + "px";
+					this.getElementsByClassName("rightItem")[0].style.display="block";					
+				}
+			};
+			leftMenuLis[j].onmouseout = function(){
+				if(this.getElementsByClassName("rightItem")[0]){
+					this.getElementsByClassName("rightItem")[0].style.display="none";					
+				}
+			};
+		}
+	</script>
+	<script>
+		var oLi = document.getElementsByClassName("oLi");
+		for(var i=0;i<oLi.length;i++){
+			oLi[i].onmouseover = function(){
+				this.getElementsByClassName("oNav")[0].style.display="block";
+			};
+			oLi[i].onmouseout = function(){
+				this.getElementsByClassName("oNav")[0].style.display="none" ;
+			};
+		}
+	</script>
+	<script type="text/javascript">
+		var downMenu = document.getElementsByClassName('downMenu');
+		var li_31 = downMenu[2].getElementsByTagName("li")[0];
+		var li_32  = li_31.getElementsByTagName("ul")[0];
+		var timer = null;
+		li_31.onmouseover = function(){
+			li_32.style.display="block";
+			clearInterval(timer);
+		};	
+		li_31.onmouseout = function(){
+			timer =setTimeout(function(){
+				li_32.style.display = "none";
+			},300);
+		};
+
+	</script>
+</body>
+</html>

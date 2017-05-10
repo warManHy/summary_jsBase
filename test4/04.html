@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>简单轮播图</title>
+</head>
+<style>
+	ul{margin: 0;padding: 0;}
+	li{
+		list-style: none;
+	}
+	a{text-decoration: none;display: block;width: 100%;color: #000;}
+	.box1,.box2{width: 540px;float: left}
+	.loop-1{
+		width: 500px;
+		height: 300px;
+		border:1px solid #000;
+		position: relative;
+	}
+	.loop-1 ul{ height: 100%; }
+	.loop-1 li{ width: 100%;height: 100%;position: absolute;top: 0;}
+	.loop-1 li a{width: 100%;height: 100%;}
+	.loop-1 li:nth-child(1){background-color: #eee;z-index: 9999;}
+	.loop-1 li:nth-child(2){background-color:red;}
+	.loop-1 li:nth-child(3){background-color:green;}
+</style>
+<body>
+<div class="box1">
+	<span>简单版开始</span>
+	<button>开始一次</button>
+	<button>loop</button>
+	<div class="loop-1">
+		<ul>
+			<li><a href="">这是01</a></li>
+			<li><a href="">这是02</a></li>
+			<li><a href="">这是03</a></li>
+		</ul>
+	</div>
+</div>
+	<div class="box2">
+		<span>正常版开始</span>
+		<button>开始一次</button>
+		<button>暂停</button>
+		<div class="loop-1">
+			<ul>
+				<li><a href="">这是01</a></li>
+				<li><a href="">这是02</a></li>
+				<li><a href="">这是03</a></li>
+			</ul>
+		</div>		
+	</div>
+	<script>
+		var loop_1 = document.getElementsByClassName('loop-1')[0];
+		var oLis_1 =  loop_1.getElementsByTagName('li');
+		var btn = document.getElementsByTagName("button");
+		btn[0].onclick = function(){
+			loopFn();
+		}
+		var loopFn = function(){
+			for(var i=0;i<oLis_1.length;i++){
+				oLis_1[i].index = i;
+				(function(i){
+					setTimeout(function(){
+						var _index = oLis_1[i].index;
+						for(var j=0;j<oLis_1.length;j++){ oLis_1[j].style.zIndex="0"; }
+						oLis_1[_index].style.zIndex = "99999";
+					},1000*i);
+				})(i);
+			}			
+		};
+		var oLis_2 = document.getElementsByClassName("loop-1")[1].getElementsByTagName("li");
+		var timer2 = null;
+		btn[2].onclick = function(){
+			loopFn1();
+		};
+		btn[3].onclick = function(){
+			clearInterval(timer2);
+			console.log("a");
+		}
+		var loopFn1 = function(){
+		for(var i=0;i<oLis_2.length;i++){
+				oLis_2[i].index = i;
+				
+				(function(i){
+					timer2 = setInterval(function(){
+						var _index = oLis_2[i].index;
+						for(var j=0;j<oLis_2.length;j++){ oLis_2[j].style.zIndex="0"; }
+						oLis_2[_index].style.zIndex = "99999";						
+					},1000*(i+1));
+				})(i);
+				
+			}			
+		};
+	</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>函数参数使用</title>
+</head>
+<style>
+	div{display: flex;}
+	pre,span{
+		background: #4d50bd;
+		color: #fff;
+		font-size: 18px;
+		padding: 0px;
+		margin-bottom: 20px;
+		border-right: 1px solid #fff;
+		width: 500px;
+	}
+	a{color: #fff}
+	span{display: block;width: 100%;}
+</style>
+<body>
+	<div>
+	<pre>
+//"use strict";
+function sum(){
+console.log(arguments.callee)
+console.log(arguments.length) //实参
+console.log(arguments.callee.length) //形参
+var sumNum = 0;
+for(var i=0;i&ltarguments.length;i++){
+	console.log( arguments[i]);
+	sumNum += arguments[i];
+}
+console.log(sumNum);
+}
+sum(1,2,2,5);		
+	</pre>
+	<pre>
+var a = function() {   
+console.log(a.caller);   
+}   
+var b = function() {   
+a();   
+}   
+b(); //函数a
+a(); //null		
+	</pre>
+	<pre>
+//这里fn是一个全局变量，不能很好的体现自己调用自己
+var fn = function(n){
+	return n + fn(n-1);
+}
+//这里是同参数调用当前执行的函数
+var fn = function(n){
+	retrun n + arguments.callee(n-1);
+}
+	</pre>
+	</div>
+	<span>
+		1.callee是指向当前调用函数，他是arguments的属性值，在严格模式在禁止,使用具名函数<br>
+		2.caller是指向当前的函数,     //caller返回一个函数的引用，这个函数调用了当前的函数。<a href="http://blog.csdn.net/laijieyao/article/details/43404953">参考</a><br>
+		3.具名函数 var fn = function demo(){}   fn引用了函数demo.
+	</span> 
+	<script type="text/javascript">
+		//"use strict";
+		function sum(){
+			console.log(arguments.callee)
+			console.log(arguments.length) //实参
+			console.log(arguments.callee.length) //形参
+			var sumNum = 0;
+			for(var i=0;i<arguments.length;i++){
+				console.log( arguments[i]);
+				sumNum += arguments[i];
+			}
+			console.log(sumNum);
+		}
+		sum(1,2,2,5);
+		var a = function() {   
+		console.log(a.caller);   
+		}   
+		var b = function() {   
+		a();   
+		}   
+		b(); //函数a
+		a(); //null
+	</script>
+</body>
+</html>

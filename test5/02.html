@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>浏览器窗口事件</title>
+</head>
+<style>
+	*{margin: 0;padding: 0;}
+	pre{
+		width: 700px;
+		padding: 10px;
+		background: #444;
+		color: #fff;
+		font-size: 16px;
+	}
+	.dialog{
+		display: none;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: #ccc;
+	}
+	.showBox{
+		width: 500px;
+		height: 500px;
+		background: #fff;
+		z-index: 999;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+	}
+</style>
+<body>
+	<pre>
+		1.clientWidth,clientHeight
+		2.scrollWidth ,scrollHeight
+		3.offsetWidth,offsetHeight
+	</pre>
+	<button>显示body的</button>
+	<button onclick="showOffset()">自身宽高</button>
+	<p id="showClient"></p>
+	<p id="showScroll"></p>
+	<p id="offset"></p>
+	<h3>应用：弹出层</h3>
+	<div class="dialog" id="dialog">
+		<div class="showBox" id="showBox">点击遮罩消失</div>
+	</div>
+	<button onclick="change(this)">不能弹出</button>
+	<script>
+		var eventUtil = {
+			addEvent:function(ele,type,fn){
+				if(ele.addEventListener){ 
+					//w3c
+					ele.addEventListener(type,fn,false);
+					return true;
+				}else{
+					ele.attachEvent("on"+type,fn);
+				}
+			},
+			removeEvent:function(ele,type,fn){
+				if(ele.removeEventListener){
+					ele.removeEventListener(type,fn,false);
+				}else{
+					ele.detachEvent("on"+type,fn)
+				}
+			},
+			//window加载时的事件添加
+			addLoadEvent: function(fn){
+				this.addEvent(window,"load",fn);
+			}
+		};
+		var btn = document.getElementsByTagName('button');
+		var pre = document.getElementsByTagName("pre")[0];
+		var clientW = document.body.clientWidth;
+		var clientH = document.body.clientHeight;
+		var flag = false;
+
+		eventUtil.addEvent(btn[0],"click",function(){
+				var showClient = document.getElementById("showClient");
+				showClient.innerHTML = "clientH:"+clientH+";"+"clientW:"+clientW;
+		});
+		window.onresize = function(){
+			var scrollH = document.body.scrollHeight;
+			var scrollW = document.body.scrollWidth;
+			var showScroll = document.getElementById('showScroll');
+			showScroll.innerHTML = "scrollH ="+scrollH+";"+"scrollW="+scrollW;
+			flag ? dialogShow() : "";
+		};
+		function showOffset() {
+			// body...
+			var offsetH = pre.offsetWidth;
+			var offsetW = pre.offsetHeight;
+			var offset = document.getElementById("offset");
+			offset.innerHTML = "offsetH ="+offsetH+";"+"offsetW="+offsetW;
+
+		}
+		function change(tag){
+			flag = !flag;
+			console.log(flag);
+			flag===true ? tag.innerHTML="可以弹出" : tag.innerHTML="不能弹出";
+		} 
+
+		//dialog
+		function dialogShow(){
+
+			var dialog = document.getElementById("dialog");
+			var showBox = document.getElementById("showBox");
+			eventUtil.addEvent(dialog,"click",function(){
+				dialog.style.display="none";
+			});
+			//dialog.style.height = -document.body.scrollHeight+"px";
+			dialog.style.display ="block";
+
+			//自身宽高
+			var showBoxOffsetH = showBox.offsetHeight;
+			var showBoxOffsetW = showBox.offsetWidth;
+
+			//计算box的位置
+			var boxLeft = Math.ceil( showBoxOffsetW/2 );
+			var boxTop = Math.ceil ( showBoxOffsetH/2 );
+			console.log(boxTop);
+			console.log(document.body.scrollHeight)
+			//设置位置
+			showBox.style.marginLeft  = -boxLeft + "px";
+			showBox.style.marginTop  = -boxTop + "px";	
+
+		}
+	</script>
+</body>
+</html>

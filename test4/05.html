@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数组基本方法</title>
+</head>
+<body>
+	<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" target="_black">参考MDN的数组</a><br>	
+	1.pop,push ,shift,unshift
+	<div class="box1">
+		<input type="text" id="inputArr"><span>输入模式：1,2,3,4</span>
+		<button>确认</button>
+		<p id="arrText"></p>
+	</div>
+	<div class="control"><button>从前删除</button><button>从后删除</button><button>从后添加</button><button>从前添加</button></div>
+	<script>
+		var inputArr = document.getElementById('inputArr');
+		var btn = document.getElementsByTagName('button');
+		var arrText = document.getElementById("arrText");
+		btn[0].addEventListener("click",function(){	
+			var inputArrVal = inputArr.value;
+			if(inputArrVal!=""){
+				arrText.innerHTML = inputArrVal;	
+			}
+		});
+		btn[1].addEventListener("click",function(){
+			var arrTextVal = arrText.innerHTML;
+			if(arrTextVal!=""){
+				var  newArrVal = arrTextVal.split(",");
+				newArrVal.shift();
+				arrText.innerHTML = newArrVal;				
+			}
+		}); 
+		btn[2].addEventListener("click",function(){
+			var arrTextVal = arrText.innerHTML;
+			if(arrTextVal!=""){
+				var  newArrVal = arrTextVal.split(",");
+				newArrVal.pop();
+				arrText.innerHTML = newArrVal;				
+			}
+		}); 
+		var index = 0;
+		btn[3].addEventListener("click",function(){
+			var arrTextVal = arrText.innerHTML;
+			if(arrTextVal!=""){
+				index ++;
+				var  newArrVal = arrTextVal.split(",");
+				newArrVal.push("last"+index);
+				arrText.innerHTML = newArrVal;				
+			}
+		}); 
+		var indexF = 0;
+		btn[4].addEventListener("click",function(){
+			var arrTextVal = arrText.innerHTML;
+			if(arrTextVal!=""){
+				indexF ++;
+				var  newArrVal = arrTextVal.split(",");
+				newArrVal.unshift("first"+indexF);
+				arrText.innerHTML = newArrVal;				
+			}
+		});
+	</script>
+	
+	2.连接concat join
+	<div class="box2">
+		<input type="text" id="inputArr1"><span>输入模式：1,2,3</span>	
+		<button>concat</button>
+		<button>join</button>
+		<p id="arrText1">1,2,3,4</p>
+	</div>
+	<script>
+		var inputArr1 = document.getElementById("inputArr1");
+		var arrText1 = document.getElementById("arrText1");
+		btn[5].addEventListener("click",function(){
+			var newArrVal1 = inputArr1.value;
+				newArrVal1 = newArrVal1.split(",");
+				if(newArrVal1!=""){
+					var arrTextVal1 = arrText1.innerHTML.split(",");
+					arrText1.innerHTML = arrTextVal1.concat(newArrVal1);					
+				}
+
+		});
+		btn[6].addEventListener("click",function(){			
+				var arrTextVal1 = arrText1.innerHTML.split(",");
+				alert(arrTextVal1.join("+"));			
+					
+		});
+	</script>
+
+	3.查看 indexOf lastIndexOf
+	<div class="box3">
+		<input type="text" id="indexItem">
+		<button>查找</button>
+		<p id="indexText">you and me we and your!</p>
+	</div>
+	<script>
+		var indexItem = document.getElementById("indexItem");
+		var indexText =document.getElementById("indexText");
+		btn[7].onclick = function(){
+			var indexItemVal = indexItem.value;
+			var indexVal = indexText.innerHTML.split(" ");
+			console.log(indexVal)
+			alert(indexVal.indexOf(indexItemVal));
+		};
+	</script>
+
+	4.排序 sort reverse
+	<div class="box4">
+		<p>[1,2,3,4]</p>
+		<script>
+			var  a =[1,2,3,4];
+			var b =[1,4,5,63,34,45,6];
+		</script>
+		<button onclick="alert(a.reverse())">反转</button>
+		<p>[1,4,5,63,34,45,6]</p>
+		<button onclick="alert(b.sort())">按头字母排序</button>
+		<button onclick="alert(b.sort(function(a,b){
+				return b-a;
+			}))">正常从大到小排序</button>
+		<button onclick="alert(b.sort(function(a,b){
+				if(a<b){
+					return -1;
+				}
+				if(a>b){
+					return 1;
+				}
+				return 0;
+			}))">正常从小到大排序</button>
+	</div>
+
+	5.slice splice
+	<div class="box5">
+		<p>slice</p>
+	</div>
+</body>
+</html>

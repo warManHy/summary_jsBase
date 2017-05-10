@@ -62,35 +62,38 @@
             mouseX = ev.clientX;
             mouseY = ev.clientY;
             //console.log(mouseX)
-        };
-        header.onmousemove = function(event){
-            if(flag){
-                var ev = event ? event: window.event;
-                var nowX = ev.clientX;
-                var nowY = ev.clientY;
-                 disX = nowX-mouseX;
-                 disY = nowY-mouseY;
-                if(disX<0){
-                    disX=0;
+                header.onmousemove = function(event){
+                if(flag){
+                    var ev = event ? event: window.event;
+                    var nowX = ev.clientX;
+                    var nowY = ev.clientY;
+                     disX = nowX-mouseX;
+                     disY = nowY-mouseY;
+                    if(disX<0){
+                        disX=0;
+                    }
+                    if(disX>document.clientHeight){
+                        disx = document.clientHeight;
+                    }
+                    if(disY<0){
+                        disY=0;
+                    }
+                    dialogDiv.style.left = disX+"px";
+                    dialogDiv.style.top = disY+"px";
+
                 }
-                if(disX>document.clientHeight){
-                    disx = document.clientHeight;
-                }
-                if(disY<0){
-                    disY=0;
-                }
+
+
+            };
+            header.onmouseup = function(){
+                header.onmouseup = null;
+                header.onmousedown = null;
+                flag = false;
                 dialogDiv.style.left = disX+"px";
                 dialogDiv.style.top = disY+"px";
-
-            }
-
-
+            };
         };
-        header.onmouseup = function(){
-            flag = false;
-            dialogDiv.style.left = disX+"px";
-            dialogDiv.style.top = disY+"px";
-        };
+
     </script>
 </body>
 </html>

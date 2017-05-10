@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>dom元素选择封装</title>
+</head>
+<style>
+	pre{
+		background-color: #295ef1;
+		color: #fff;
+		font-size: 16px;
+	}
+</style>
+<body>
+<pre>
+var get = {
+	byId:function(id){
+		return document.getElementById(id);
+	},
+	byClass:function(sClass,oParent){
+		oParent = oParent || document;
+		if(document.getElementsByClassName){
+			return oParent.getElementsByClassName(sClass);
+		}else{
+			var arr =[];
+			var aElem = this.getTagName("*",oParent);
+			for(var i=0;i &lt aElem.length;i++){
+				if(aElem[i].className==sClass){
+					arr.push(aElem[i]);
+				}
+			}
+			return arr;
+		}
+
+	},
+	byTagName:function(tagName,obj){
+		return ( obj||document ).getElementsByTagName(tagName);
+	}
+};	
+
+对于className有多种方法：
+
+var reClass = new RegExp("(^| )" + sClass + "( |$)"); //在字符串的开头或空格开头，然后是sClass，后面跟空格或末尾
+var aElem = this.byTagName("*", oParent);
+for (var i = 0; i < aElem.length; i++) reClass.test(aElem[i].className) && aClass.push(aElem[i]);
+
+
+</pre>
+
+	<script>
+	var get = {
+		byId:function(id){
+			return document.getElementById(id);
+		},
+		byClass:function(sClass,oParent){
+			oParent = oParent || document;
+			if(document.getElementsByClassName){
+				return oParent.getElementsByClassName(sClass);
+			}else{
+				var arr =[];
+				var aElem = this.getTagName("*",oParent);
+				for(var i=0;i<aElem.length;i++){
+					if(aElem[i].className==sClass){
+						arr.push(aElem[i]);
+					}
+				}
+				return arr;
+			}
+
+		},
+		byTagName:function(tagName,obj){
+			return ( obj||document ).getElementsByTagName(tagName);
+		}
+	};
+	</script>
+</body>
+</html>

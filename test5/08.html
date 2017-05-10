@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>人人评论</title>
+</head>
+<style>
+	.content{
+		width: 960px;
+		height: auto;
+		border:1px solid #ccc;
+		margin:0 auto;
+		font-size: 16px;
+	}
+	.inputAll{border-bottom: 1px solid #ccc;}
+	.input{
+		width: 900px;
+		height: 116px;
+		padding: 10px;
+		margin: 0 auto;
+	}
+	.inputContent{
+		width: 600px;
+		float: left;
+	}
+	textarea{
+		width: 590px;
+		height: 110px;
+		resize: none;
+		font-size:16px;
+	}
+	input{
+		width: 60px;
+		height: 60px;
+		background: rgba(49, 49, 234, 0.98);
+		color: #fff;
+		font-size: 20px;
+		border:none;
+		outline: none;
+		text-align: center;
+	}
+	.textConAll{
+		width: 100%;
+		height: auto;
+	}
+	.textCon{
+		padding: 10px 30px;
+	}
+	.itemConH{
+		width: 100%;
+		height: 122px;
+	}
+	.itemCon{
+		width: 100%;
+		height: 80px;
+		background: #ccc;
+		color: green;
+		position: relative;
+	}
+	.item{
+		position: absolute;
+		display: block;
+		max-width: 54px;
+		max-height: 42px;
+		padding: 10px;
+		background: #444;
+		color: #fff;
+		cursor: pointer;		
+		overflow: hidden;
+	}
+	.close-i{
+		top: 0px;
+		right: 0px;
+	}
+	.zan{
+		width: 100%;
+		height:42px;
+		position: absolute;
+		bottom:-42px;
+		left: 0;
+		background: #eee;
+	}
+	.zan-i{
+		left: 0;
+		bottom: 0;
+	}
+	.zan-i:hover{
+		-webkit-transition: all 0.3s ease-in;
+	    -o-transition: all 0.3s ease-in;
+	    transition: all 0.3s ease-in;
+	    transform: scale(1.1);
+	}
+	.share-i{
+		left: 100px;
+		bottom: 0;
+	}
+</style>
+<body>
+	<div class="content">
+		<h2>人人网评论</h2>
+		<div class="inputAll">
+			<div class="input">
+				<div class="inputContent"><textarea name="" id="inputDiv"></textarea></div>
+				<input type="button" value="提交">
+			</div>
+		</div>
+		<div class="textConAll">
+			<div class="textCon" id="textCon">
+				<!-- <div class="itemConH">
+					<div class="itemCon">
+						<i class="close-i item">X</i>
+						<span class="item-html">这是测试第一条</span>
+						<div class="zan"><i class="zan-i item">点赞</i><i class="share-i item">分享</i></div>
+					</div>					
+				</div> -->
+			</div>
+		</div>
+
+	</div>
+</body>
+<script>
+// getId Class TagName
+var get ={
+	Id:function(ele,obj){
+		return  ( obj || document ).getElementById(ele);
+	},
+	ByClass: function(sClass, oParent) {
+		oParent ? oParent : document;
+		var aClass = [];
+		var reClass = new RegExp("(^| )" + sClass + "( |$)");
+		var aElem = this.TagName("*", oParent);
+		for (var i = 0; i < aElem.length; i++) reClass.test(aElem[i].className) && aClass.push(aElem[i]);
+		return aClass;
+	},
+	TagName:function(ele,obj){
+		return (obj || document).getElementsByTagName(ele);
+	}
+};	
+	var zanIndex = 0;
+	function itemHtml(data){
+		var html = `
+				<div class="itemConH">
+					<div class="itemCon">
+						<i class="close-i item">X</i>
+						<span class="item-html">${data}</span>
+						<div class="zan"><i class="zan-i item">点赞${zanIndex}</i><i class="share-i item">分享</i></div>
+					</div>					
+				</div>
+		`;
+		return html;
+	}
+	var inputDiv = document.getElementById('inputDiv');
+	var inputs = document.getElementsByTagName('input');
+	var textCon = document.getElementById("textCon");
+	var arr = [];
+	inputs[0].onclick=function(){
+		var inputDivVal = inputDiv.value;
+		var html ="";	
+		if(inputDivVal){
+			arr.push( itemHtml(inputDivVal) );
+			for(var i=arr.length;i--;i>0){
+				html += arr[i];
+				textCon.innerHTML= html;
+				closeAttr();
+				shareAttr();
+			}
+		}
+		inputDiv.value="";
+	};
+
+	function closeAttr(){
+		var closes = get.ByClass("close-i");
+		for(var j=closes.length;j--;j>0){
+			closes[j].index = closes.length-j-1;
+			closes[j].onclick = function(){
+				if(closes.length==this.index+1){
+					textCon.removeChild(this.parentNode.parentNode)
+					arr.pop();
+					closes.splice(this.index,1);	
+				}else{
+					textCon.removeChild(this.parentNode.parentNode)
+					arr.splice(this.index,1);
+					closes.splice(this.index,1);					
+				}
+				//console.log(closes.length,arr)
+			}
+		}
+	}
+	function shareAttr(){
+		zanIndex=0;
+		var zans = get.ByClass("zan-i");
+		for(var i = zans.length;i--;i>0){
+			zans[i].index = zans.length-i-1;
+			zans[i].onclick = function(){
+				zanIndex==1 ? zanIndex=zanIndex-1 : zanIndex=+1;
+				this.innerHTML = zanHtml(zanIndex);
+			}
+		}
+	}
+	function zanHtml(data){
+		var html =`点赞${data}`;
+		return html;
+	}
+</script>
+</html>

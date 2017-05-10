@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>dom事件封装（兼容性）</title>
+</head>
+<style>
+	pre{background: #ccc;border:1px solid #eee;color:green;font-size: 16px;padding: 10px;}
+</style>
+<body>
+	<pre>
+var eventUtil = {
+	addEvent:function(ele,type,fn){
+		if(ele.addEventListener){ 
+			//w3c
+			ele.addEventListener(type,fn,false);
+			return true;
+		}else{
+			ele.attachEvent("on"+type,fn);
+		}
+	},
+	removeEvent:function(ele,type,fn){
+		if(ele.removeEventListener){
+			ele.removeEventListener(type,fn,false);
+		}else{
+			ele.detachEvent("on"+type,fn)
+		}
+	},
+	//window加载时的事件添加
+	addLoadEvent: function(fn){
+		this.addEvent(window,"load",fn);
+	}
+};	
+	</pre>
+	<button>添加事件</button>
+	<button>移除事件</button>
+	<span>点击背景</span>
+	<script>
+		var eventUtil = {
+			addEvent:function(ele,type,fn){
+				if(ele.addEventListener){ 
+					//w3c
+					ele.addEventListener(type,fn,false);
+					return true;
+				}else{
+					ele.attachEvent("on"+type,fn);
+				}
+			},
+			removeEvent:function(ele,type,fn){
+				if(ele.removeEventListener){
+					ele.removeEventListener(type,fn,false);
+				}else{
+					ele.detachEvent("on"+type,fn)
+				}
+			},
+			//window加载时的事件添加
+			addLoadEvent: function(fn){
+				this.addEvent(window,"load",fn);
+			}
+		};
+		var btn = document.getElementsByTagName('button');
+		var pre = document.getElementsByTagName("pre")[0];
+		eventUtil.addEvent(btn[0],"click",function(){
+			eventUtil.addEvent(pre,"click",demo);
+		});
+		eventUtil.addEvent(btn[1],"click",function(){
+			eventUtil.removeEvent(pre,"click",demo);
+		});
+		function demo(){
+			alert("a");
+		}
+	</script>
+</body>
+</html>
